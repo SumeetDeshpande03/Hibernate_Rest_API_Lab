@@ -42,7 +42,8 @@ public class PlayerController {
 	public ResponseEntity createPlayer(@Param("firstName") String firstName, @Param("lastName") String lastName, 
 							@Param("email") String email, @Param("description") String description,
 							@Param("street")String street, @Param("city")String city,
-							@Param("state")String state, @Param("zip")String zip) {
+							@Param("state")String state, @Param("zip")String zip,
+							@Param("sponsorId")Long sponsorId) {
 		
 		Address address = new Address(street, city, state, zip);
 		Player player = new Player(firstName, lastName, email, description, address);
@@ -50,7 +51,17 @@ public class PlayerController {
 			/**
 			 * Return response with status 200
 			 */
-			return ResponseEntity.ok(service.createPlayer(player));
+			Player createdPlayer = null;
+			if(sponsorId!=null) {
+				createdPlayer = service.createPlayer(player, sponsorId);
+				
+			} else {
+				createdPlayer = service.createPlayer(player, null);
+			}
+			if(createdPlayer==null) {
+				return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+			}
+			return ResponseEntity.ok(createdPlayer);
 		} catch(Exception e) {
 			/**
 			 * Return status 400 if input is invalid
@@ -100,7 +111,8 @@ public class PlayerController {
 	public ResponseEntity updatePlayer(@PathVariable long id, @Param("firstName") String firstName, @Param("lastName") String lastName, 
 							@Param("email") String email, @Param("description") String description,
 							@Param("street")String street, @Param("city")String city,
-							@Param("state")String state, @Param("zip")String zip) {
+							@Param("state")String state, @Param("zip")String zip,
+							@Param("sponsorId")String sponsorId) {
 		
 		Address address = new Address(street, city, state, zip);
 		Player newPlayer = new Player(firstName, lastName, email, description, address);
