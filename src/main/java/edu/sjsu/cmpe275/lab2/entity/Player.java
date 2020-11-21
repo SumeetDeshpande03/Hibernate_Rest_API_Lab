@@ -4,6 +4,9 @@ import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Column;
 import javax.validation.constraints.NotNull;
@@ -35,6 +38,10 @@ public class Player {
 	
 	@Embedded
 	private Address address;
+	
+	@ManyToOne()
+	@JoinColumn(name = "sponsor_id_fk" , referencedColumnName= "id")
+	private Sponsor sponsor;
 	
 	public Player() {
 		
@@ -94,6 +101,14 @@ public class Player {
 
 	public void setAddress(Address address) {
 		this.address = address;
+	}
+	
+	public Sponsor getSponsor() {
+		return sponsor;
+	}
+
+	public void setSponsor(Sponsor sponsor) {
+		this.sponsor = sponsor;
 	}
 	
 }
