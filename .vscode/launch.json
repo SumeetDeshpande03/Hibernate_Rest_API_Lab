@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-Cmpe275Lab2Application<cmpe275_Lab2>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "mainClass": "edu.sjsu.cmpe275.lab2.Cmpe275Lab2Application",
+            "projectName": "cmpe275_Lab2",
+            "args": ""
+        }
+    ]
+}
