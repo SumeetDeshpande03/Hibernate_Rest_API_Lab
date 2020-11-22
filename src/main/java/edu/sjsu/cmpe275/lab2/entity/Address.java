@@ -4,7 +4,7 @@ import javax.persistence.Embeddable;
 
 /**
  * Address Class which is to be embedded in the Player/Sponsor object
- * @author sumeetdeshpande
+ * @author sumeetdeshpande, AmbikaNa
  *
  */
 @Embeddable
