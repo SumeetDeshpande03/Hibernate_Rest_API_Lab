@@ -27,16 +27,21 @@ public class OpponentService {
 	 * @return
 	 */
 	public Opponent addOpponent(long id1, long id2) {
-		Opponent details = new Opponent();                         
-		details.setPlayerid(id1); 
-		details.setOpponentid(id2);
+		Opponent details1 = new Opponent();                         
+		details1.setPlayerid(id1); 
+		details1.setOpponentid(id2);
+		
+		Opponent details2 = new Opponent();                         
+		details2.setPlayerid(id2); 
+		details2.setOpponentid(id1);
 		try {
 			Object result = opponentRepository.findByPlayeridAndOpponentid(id1, id2);
-			Object result_reverse = opponentRepository.findByPlayeridAndOpponentid(id2, id1);
 	
-			if (result == null && result_reverse == null) {
-				System.out.println("addOpponent: "+ details.toString());
-				return opponentRepository.save(details);
+			if (result == null) {
+				System.out.println("addOpponent: "+ details1.toString());
+
+				opponentRepository.save(details2);
+				return opponentRepository.save(details1);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

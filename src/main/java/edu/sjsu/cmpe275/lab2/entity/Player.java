@@ -2,11 +2,17 @@ package edu.sjsu.cmpe275.lab2.entity;
 
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.validation.constraints.NotNull;
 
@@ -45,7 +51,12 @@ public class Player {
 	@ManyToOne
 	@JoinColumn(name = "sponsor_id")
 	private Sponsor sponsor;
+
 	
+	@OneToMany(cascade = {CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.MERGE}, mappedBy = "playerid", fetch = FetchType.LAZY)
+	private List<Opponent> opponents;
+	
+
 	public Player() {
 		
 	}
@@ -113,5 +124,14 @@ public class Player {
 	public void setSponsor(Sponsor sponsor) {
 		this.sponsor = sponsor;
 	}
+	
+	public List<Opponent> getOpponents() {
+		return opponents;
+	}
+
+	public void setOpponents(List<Opponent> opponents) {
+		this.opponents = opponents;
+	}
+
 	
 }

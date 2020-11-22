@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import edu.sjsu.cmpe275.lab2.entity.Player;
 import edu.sjsu.cmpe275.lab2.entity.Sponsor;
+import edu.sjsu.cmpe275.lab2.repository.OpponentRepository;
 import edu.sjsu.cmpe275.lab2.repository.PlayerRepository;
 import edu.sjsu.cmpe275.lab2.repository.SponsorRepository;
 
@@ -21,6 +22,9 @@ public class PlayerService {
 	
 	@Autowired
 	private SponsorRepository sponsorRepository;
+	
+	@Autowired
+	private OpponentRepository opponentRepository;
 	
 	/**
 	 * Creates player and adds it to the database
@@ -111,6 +115,11 @@ public class PlayerService {
 			return null;
 		} else {
 			playerRepository.delete(deletedPlayer);
+			/**
+			 * Delete the relationship where player id is 
+			 * in opponentid or playerid column
+			 */
+			opponentRepository.deleteByPlayeridOrOpponentid(id, id);
 			return deletedPlayer;
 		}
 		
