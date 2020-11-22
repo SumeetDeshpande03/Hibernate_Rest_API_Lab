@@ -22,7 +22,7 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 /**
  * Entity object for Player. This is mapped to the Player Table in the database
- * @author sumeetdeshpande
+ * @author sumeetdeshpande, AmbikaNa
  *
  */
 @Entity
