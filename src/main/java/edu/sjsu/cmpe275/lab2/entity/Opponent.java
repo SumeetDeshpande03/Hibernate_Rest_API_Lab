@@ -7,7 +7,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 /**
- * Address Class which is to be embedded in the Player/Sponsor object
+ * Entity object for opponent
  * @author priyankasharma
  *
  */

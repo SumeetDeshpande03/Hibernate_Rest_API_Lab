@@ -28,7 +28,7 @@ public class OpponentController {
 	private PlayerService playerService;
 	
 	/**
-	 * PUT API end point for Player
+	 * POST API end point for Opponent
 	 * @param id1
 	 * @param id2
 	 * @return
@@ -52,7 +52,7 @@ public class OpponentController {
 	}
 	
 	/**
-	 * DELETE API end point for Player
+	 * DELETE API end point for Opponent
 	 * @param id1
 	 * @param id2
 	 * @return

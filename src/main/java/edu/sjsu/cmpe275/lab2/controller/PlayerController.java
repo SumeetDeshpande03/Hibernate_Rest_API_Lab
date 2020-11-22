@@ -51,13 +51,25 @@ public class PlayerController {
 		
 		try {
 			Player createdPlayer = null;
-			
+			/**
+			 * Check whether required files are entered or not
+			 */
+			if((firstName==null || firstName.equals("") || 
+					(lastName==null || lastName.equals("")) ||
+						(email==null || email.equals("")))) {
+				throw new Exception("Required fields(Either firstName, lastName or email) are null or empty");
+			}
+			/**
+			 * If sponsor id is not null, pass it or else pass null
+			 */
 			if(sponsorId!=null) {
 				createdPlayer = service.createPlayer(player, sponsorId);
 			} else {
 				createdPlayer = service.createPlayer(player, null);
 			}
-			
+			/**
+			 * Return status 200 after persisting
+			 */
 			return ResponseEntity.ok(createdPlayer);
 			
 		} catch(Exception e) {
@@ -116,6 +128,15 @@ public class PlayerController {
 		Address address = new Address(street, city, state, zip);
 		Player newPlayer = new Player(firstName, lastName, email, description, address);
 		try {
+			/**
+			 * Check whether required files are entered or not
+			 */
+			if((firstName==null || firstName.equals("") || 
+					(lastName==null || lastName.equals("")) ||
+						(email==null || email.equals("")))) {
+				throw new Exception("Required fields(Either firstName, lastName or email) are null or empty");
+			}
+			
 			Player updatedPlayer = service.updatePlayerById(id, newPlayer, sponsorId);
 			if(updatedPlayer==null) {
 				/**
@@ -128,6 +149,7 @@ public class PlayerController {
 				 */
 				return ResponseEntity.ok(updatedPlayer);
 			}
+			
 		} catch(Exception e) {
 			/**
 			 * Return status 400 if input is invalid

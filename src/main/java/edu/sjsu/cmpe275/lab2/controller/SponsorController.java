@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import edu.sjsu.cmpe275.lab2.entity.Address;
-import edu.sjsu.cmpe275.lab2.entity.Player;
 import edu.sjsu.cmpe275.lab2.entity.Sponsor;
 import edu.sjsu.cmpe275.lab2.service.SponsorService;
 
@@ -41,6 +40,12 @@ public class SponsorController {
 		Sponsor sponsor = new Sponsor(name, description, address);
 		
 		try {
+			/**
+			 * Check whether required files are entered or not
+			 */
+			if((name==null || name.equals(""))) {
+				throw new Exception("Required field(Name) is null or empty");
+			}
 			/**
 			 * Return response with status 200
 			 */
@@ -86,6 +91,12 @@ public class SponsorController {
 		Address address = new Address(street, city, state, zip);
 		Sponsor newSponsor = new Sponsor(name, description, address);
 		try {
+			/**
+			 * Check whether required files are entered or not
+			 */
+			if((name==null || name.equals(""))) {
+				throw new Exception("Required field(Name) is null or empty");
+			}
 			Sponsor updatedSponsor = service.updateSponsorById(id, newSponsor);
 			if(updatedSponsor==null) {
 				/**
