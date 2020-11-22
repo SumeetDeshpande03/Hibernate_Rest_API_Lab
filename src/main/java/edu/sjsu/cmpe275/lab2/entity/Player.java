@@ -17,6 +17,7 @@ import javax.persistence.Column;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 /**
@@ -50,10 +51,12 @@ public class Player {
 	
 	@ManyToOne
 	@JoinColumn(name = "sponsor_id")
+	@JsonIgnoreProperties({ "players" }) // Added to remove two level deep response
 	private Sponsor sponsor;
 
 	
 	@OneToMany(cascade = {CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.MERGE}, mappedBy = "playerid", fetch = FetchType.LAZY)
+	@JsonIgnoreProperties({ "playerid", "id" })
 	private List<Opponent> opponents;
 	
 

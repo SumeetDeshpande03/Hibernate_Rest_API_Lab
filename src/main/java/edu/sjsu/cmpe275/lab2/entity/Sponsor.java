@@ -14,6 +14,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 /**
@@ -39,6 +40,7 @@ public class Sponsor {
 	private Address address;
 	
 	@OneToMany(cascade = {CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.MERGE}, mappedBy = "sponsor", fetch = FetchType.LAZY)
+	@JsonIgnoreProperties({ "sponsor", "opponents" }) // Added to remove two level deep response
 	private List<Player> players;
 	
 	/**
