@@ -15,6 +15,12 @@ import edu.sjsu.cmpe275.lab2.entity.Address;
 import edu.sjsu.cmpe275.lab2.entity.Sponsor;
 import edu.sjsu.cmpe275.lab2.service.SponsorService;
 
+/**
+ * Controller for all the Sponsor Rest Api request endpoints. This routes the requests to the respective services
+ * @author sumeetdeshpande, Ambika Na
+ *
+ */
+
 @RestController
 public class SponsorController {
 
