@@ -60,7 +60,7 @@ public class SponsorController {
 	 * @return
 	 */
 	@GetMapping("/sponsor/{id}")
-	public ResponseEntity getPlayer(@PathVariable long id) {
+	public ResponseEntity getSponsor(@PathVariable long id) {
 		
 		Sponsor sponsor = service.getSponsorById(id);
 		if(sponsor!=null) {
