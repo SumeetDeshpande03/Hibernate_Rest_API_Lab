@@ -6,7 +6,7 @@ import edu.sjsu.cmpe275.lab2.entity.Player;
 
 /**
  * Interface Player Repository which extends the JPA Repository for performing all the CRUD operations
- * @author sumeetdeshpande
+ * @author sumeetdeshpande, AmbikaNa
  *
  */
 public interface PlayerRepository extends JpaRepository<Player, Long>{
