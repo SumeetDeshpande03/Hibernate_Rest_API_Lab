@@ -17,7 +17,7 @@ import edu.sjsu.cmpe275.lab2.service.PlayerService;
 
 /**
  * Controller for all the Rest Api request endpoints. This routes the requests to the respective services
- * @author sumeetdeshpande
+ * @author sumeetdeshpande, Ambika Na
  *
  */
 @RestController
