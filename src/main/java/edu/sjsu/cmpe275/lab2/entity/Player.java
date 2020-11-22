@@ -6,10 +6,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Column;
 import javax.validation.constraints.NotNull;
+
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 /**
  * Entity object for Player. This is mapped to the Player Table in the database
@@ -18,6 +20,7 @@ import javax.validation.constraints.NotNull;
  */
 @Entity
 @Table(name = "PLAYER")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Player {
 	
 	@Id
@@ -39,8 +42,8 @@ public class Player {
 	@Embedded
 	private Address address;
 	
-	@ManyToOne()
-	@JoinColumn(name = "sponsor_id_fk" , referencedColumnName= "id")
+	@ManyToOne
+	@JoinColumn(name = "sponsor_id")
 	private Sponsor sponsor;
 	
 	public Player() {

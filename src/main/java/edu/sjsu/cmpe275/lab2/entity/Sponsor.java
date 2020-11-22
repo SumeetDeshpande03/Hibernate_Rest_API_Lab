@@ -8,10 +8,13 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.PreRemove;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 /**
  * Entity object for Sponsor. This is mapped to the Sponsor Table in the database
@@ -20,6 +23,7 @@ import javax.validation.constraints.NotNull;
  */
 @Entity
 @Table(name = "SPONSOR")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Sponsor {
 	
 	@Id
@@ -34,10 +38,16 @@ public class Sponsor {
 	@Embedded
 	private Address address;
 	
-	@OneToMany(targetEntity = Player.class, mappedBy = "sponsor", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToMany(cascade = {CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.MERGE}, mappedBy = "sponsor", fetch = FetchType.LAZY)
 	private List<Player> players;
 	
-	//@JoinColumn(name = "sponsor_id_fk", referencedColumnName = "id")
+	/**
+	 * Used for setting player sponsor id to null in player table before removing sponsor
+	 */
+	@PreRemove
+	private void preRemove() {
+		players.forEach(player->player.setSponsor(null));
+	}
 
 	public Sponsor() {
 		
@@ -80,7 +90,7 @@ public class Sponsor {
 	public void setAddress(Address address) {
 		this.address = address;
 	}
-
+	
 	public List<Player> getPlayers() {
 		return players;
 	}

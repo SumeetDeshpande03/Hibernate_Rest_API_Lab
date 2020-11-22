@@ -36,6 +36,7 @@ public class PlayerController {
 	 * @param city
 	 * @param state
 	 * @param zip
+	 * @param sponsorId
 	 * @return
 	 */
 	@PostMapping("/player")
@@ -47,21 +48,18 @@ public class PlayerController {
 		
 		Address address = new Address(street, city, state, zip);
 		Player player = new Player(firstName, lastName, email, description, address);
+		
 		try {
-			/**
-			 * Return response with status 200
-			 */
 			Player createdPlayer = null;
+			
 			if(sponsorId!=null) {
 				createdPlayer = service.createPlayer(player, sponsorId);
-				
 			} else {
 				createdPlayer = service.createPlayer(player, null);
 			}
-			if(createdPlayer==null) {
-				return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
-			}
+			
 			return ResponseEntity.ok(createdPlayer);
+			
 		} catch(Exception e) {
 			/**
 			 * Return status 400 if input is invalid
@@ -105,6 +103,7 @@ public class PlayerController {
 	 * @param city
 	 * @param state
 	 * @param zip
+	 * @param sponsorId
 	 * @return
 	 */
 	@PutMapping("/player/{id}")
@@ -112,12 +111,12 @@ public class PlayerController {
 							@Param("email") String email, @Param("description") String description,
 							@Param("street")String street, @Param("city")String city,
 							@Param("state")String state, @Param("zip")String zip,
-							@Param("sponsorId")String sponsorId) {
+							@Param("sponsorId")Long sponsorId) {
 		
 		Address address = new Address(street, city, state, zip);
 		Player newPlayer = new Player(firstName, lastName, email, description, address);
 		try {
-			Player updatedPlayer = service.updatePlayerById(id, newPlayer);
+			Player updatedPlayer = service.updatePlayerById(id, newPlayer, sponsorId);
 			if(updatedPlayer==null) {
 				/**
 				 * Return status 404 if player not found

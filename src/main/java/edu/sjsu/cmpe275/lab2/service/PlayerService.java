@@ -26,14 +26,24 @@ public class PlayerService {
 	 * Creates player and adds it to the database
 	 * @param player
 	 * @return
+	 * @throws Exception 
 	 */
-	public Player createPlayer(Player player, Long sponsorId) {
+	public Player createPlayer(Player player, Long sponsorId) throws Exception {
 		
-		Sponsor sponsor = sponsorRepository.findById(sponsorId).orElse(null);
-		if(sponsor==null) {
-			return null;
+		/**
+		 * Check if sponsor id is passed
+		 */
+		if(sponsorId!=null) {
+			Sponsor sponsor = sponsorRepository.findById(sponsorId).orElse(null);
+			/**
+			 * Check if sponsor id is present
+			 */
+			if(sponsor==null) {
+				throw new Exception("Sponsor does not exist");
+			}
+			player.setSponsor(sponsor);
 		}
-		player.setSponsor(sponsor);
+		
 		return playerRepository.save(player);
 	}
 	
@@ -51,8 +61,10 @@ public class PlayerService {
 	 * @param id
 	 * @param newPlayer
 	 * @return
+	 * @throws Exception 
 	 */
-	public Player updatePlayerById(long id, Player newPlayer) {
+	public Player updatePlayerById(long id, Player newPlayer, Long sponsorId) throws Exception {
+		
 		Player existingPlayer = playerRepository.findById(id).orElse(null);
 		/**
 		 * Return null if player not found
@@ -60,13 +72,26 @@ public class PlayerService {
 		if(existingPlayer==null) {
 			return null;
 		} else {
+			/**
+			 * Check if sponsor id is passed
+			 */
+			if(sponsorId!=null) {
+				Sponsor sponsor = sponsorRepository.findById(sponsorId).orElse(null);
+				/**
+				 * Check if sponsor id is present
+				 */
+				if(sponsor==null) {
+					throw new Exception("Sponsor does not exist");
+				}
+				existingPlayer.setSponsor(sponsor);
+			}
+			
 			existingPlayer.setFirstName(newPlayer.getFirstName());
 			existingPlayer.setLastName(newPlayer.getLastName());
 			existingPlayer.setEmail(newPlayer.getEmail());
 			existingPlayer.setDescription(newPlayer.getDescription());
-			if(newPlayer.getAddress()!=null) {
-				existingPlayer.setAddress(newPlayer.getAddress());
-			}
+			existingPlayer.setAddress(newPlayer.getAddress());
+
 			return playerRepository.save(existingPlayer);
 		}
 	}
@@ -77,6 +102,7 @@ public class PlayerService {
 	 * @return
 	 */
 	public Player deletePlayerById(long id) {
+		
 		Player deletedPlayer = playerRepository.findById(id).orElse(null);
 		/**
 		 * Return null if player not found
@@ -87,6 +113,7 @@ public class PlayerService {
 			playerRepository.delete(deletedPlayer);
 			return deletedPlayer;
 		}
+		
 	}
 	
 }
