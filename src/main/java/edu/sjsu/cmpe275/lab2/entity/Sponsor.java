@@ -19,7 +19,7 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 /**
  * Entity object for Sponsor. This is mapped to the Sponsor Table in the database
- * @author sumeetdeshpande
+ * @author sumeetdeshpande, AmbikaNa
  *
  */
 @Entity
