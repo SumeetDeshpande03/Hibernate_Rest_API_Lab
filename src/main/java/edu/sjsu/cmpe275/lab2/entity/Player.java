@@ -55,15 +55,11 @@ public class Player {
 	private Sponsor sponsor;
 
 	
-	@OneToMany(cascade = {CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.MERGE}, mappedBy = "playerid", fetch = FetchType.LAZY)
+	@OneToMany(cascade = {CascadeType.ALL}, mappedBy = "playerid", fetch = FetchType.LAZY)
 	@JsonIgnoreProperties({ "playerid", "id" })
 	private List<Opponent> opponents;
 	
-	@PreRemove
-	private void preRemove() {
-		this.setOpponents(null);
-	}
-
+	
 	public Player() {
 		
 	}
