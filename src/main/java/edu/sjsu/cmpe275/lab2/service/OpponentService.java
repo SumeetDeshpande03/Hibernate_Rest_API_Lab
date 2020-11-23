@@ -83,17 +83,4 @@ public class OpponentService {
 		}
 		return null;
 	}
-	
-	
-	/**
-	 * Deletes the opponents by playerid
-	 * @param id1
-	 * @return
-	 */
-	public void deleteOpponents(long playerid) {
-		opponentRepository.deleteByPlayeridOrOpponentid(playerid, playerid);
-		return;
-	}
-	
-	
 }

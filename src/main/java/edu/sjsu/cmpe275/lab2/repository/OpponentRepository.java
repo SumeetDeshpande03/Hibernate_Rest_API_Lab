@@ -15,6 +15,6 @@ public interface OpponentRepository extends JpaRepository<Opponent, Long>{
 	Opponent findByPlayeridAndOpponentid(Long playerid, Long opponentid);
 	
 	@Transactional
-	void deleteByPlayeridOrOpponentid(Long playerid, Long opponentid);
+	void deleteByOpponentid(Long opponentid);
 
 }
