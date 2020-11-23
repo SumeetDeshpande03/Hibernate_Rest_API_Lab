@@ -48,7 +48,7 @@ public class OpponentController {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
 		}
 		
-		return ResponseEntity.status(HttpStatus.OK).body(null);
+		return ResponseEntity.status(HttpStatus.OK).body("Opponent added successfully");
 	}
 	
 	/**
