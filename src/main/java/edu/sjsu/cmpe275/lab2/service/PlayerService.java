@@ -114,12 +114,12 @@ public class PlayerService {
 		if(deletedPlayer==null) {
 			return null;
 		} else {
-			playerRepository.delete(deletedPlayer);
 			/**
 			 * Delete the relationship where player id is 
 			 * in opponentid or playerid column
 			 */
 			opponentRepository.deleteByPlayeridOrOpponentid(id, id);
+			playerRepository.delete(deletedPlayer);
 			return deletedPlayer;
 		}
 		
