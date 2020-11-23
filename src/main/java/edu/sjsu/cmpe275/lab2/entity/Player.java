@@ -59,6 +59,10 @@ public class Player {
 	@JsonIgnoreProperties({ "playerid", "id" })
 	private List<Opponent> opponents;
 	
+	@PreRemove
+	private void preRemove() {
+		this.setOpponents(null);
+	}
 
 	public Player() {
 		
