@@ -6,10 +6,12 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -56,7 +58,7 @@ public class Player {
 
 	
 	@OneToMany(cascade = {CascadeType.ALL}, mappedBy = "playerid", fetch = FetchType.LAZY)
-	@JsonIgnoreProperties({ "playerid", "id" })
+	@JsonIgnoreProperties({ "playerid", "pkid" })
 	private List<Opponent> opponents;
 	
 	
@@ -129,6 +131,9 @@ public class Player {
 	}
 	
 	public List<Opponent> getOpponents() {
+		if (opponents == null) {
+			return new ArrayList<>();
+		}
 		return opponents;
 	}
 

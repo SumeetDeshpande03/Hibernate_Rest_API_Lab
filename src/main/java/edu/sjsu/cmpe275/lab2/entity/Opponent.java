@@ -6,6 +6,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * Entity object for opponent
  * @author priyankasharma
@@ -33,7 +35,7 @@ public class Opponent {
 		this.opponentid = opponentid;
 	}
 
-	
+	@JsonProperty("pkid")
 	public long getId() {
 		return id;
 	}
@@ -41,8 +43,7 @@ public class Opponent {
 	public void setId(long id) {
 		this.id = id;
 	}
-	
-
+		
 	public long getPlayerid() {
 		return playerid;
 	}
@@ -50,7 +51,8 @@ public class Opponent {
 	public void setPlayerid(long playerid) {
 		this.playerid = playerid;
 	}
-
+	
+	@JsonProperty("id")
 	public long getOpponentid() {
 		return opponentid;
 	}
